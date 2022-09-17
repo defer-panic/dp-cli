@@ -39,8 +39,6 @@ func executeArticleExport(_ *cobra.Command, args []string) error {
 		cmdArgs = append(cmdArgs, "--toc")
 	}
 
-	fmt.Println(args[0], outputFilename, cmdArgs)
-
 	out, err := exec.Command("pandoc", cmdArgs...).CombinedOutput()
 	if err != nil {
 		return err
