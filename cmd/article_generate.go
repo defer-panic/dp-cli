@@ -114,7 +114,7 @@ func readDataFromInput() (*Data, error) {
 	}
 
 	mainFontInput := textinput.New("What main font should be used?")
-	mainFontInput.InitialValue = "Times New Roman"
+	mainFontInput.InitialValue = "CMUSerif-Roman"
 
 	mainFont, err := mainFontInput.RunPrompt()
 	if err != nil {
@@ -122,7 +122,7 @@ func readDataFromInput() (*Data, error) {
 	}
 
 	monoFontInput := textinput.New("What monospace font should be used?")
-	monoFontInput.InitialValue = "Fira Code"
+	monoFontInput.InitialValue = "CMUTypewriter-Regular"
 
 	monoFont, err := monoFontInput.RunPrompt()
 	if err != nil {
