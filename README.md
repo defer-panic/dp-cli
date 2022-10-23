@@ -6,7 +6,7 @@ Toolkit for managing Defer Panic articles and other stuff.
 
 * [pandoc](https://pandoc.org)
 * xelatex (for exporting to PDF)
-* Computer Modern Unicode fonts (if you want to use them for exporting to PDF) 
+* [Computer Modern Unicode fonts](https://cm-unicode.sourceforge.io/index.html) (if you want to use them for exporting to PDF) 
 
 ## Install
 
