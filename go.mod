@@ -4,6 +4,8 @@ go 1.19
 
 require (
 	github.com/erikgeiser/promptkit v0.7.0
+	github.com/jedib0t/go-pretty/v6 v6.4.2
+	github.com/samber/mo v1.5.1
 	github.com/spf13/cobra v1.5.0
 )
 
