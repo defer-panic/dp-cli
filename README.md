@@ -8,7 +8,7 @@ Toolkit for managing Defer Panic articles and other stuff.
 * xelatex (for exporting to PDF)
 * [Computer Modern Unicode fonts](https://cm-unicode.sourceforge.io/index.html) (if you want to use them for exporting to PDF) 
 
-## Install
+## Install [![Coverage Status](https://coveralls.io/repos/github/defer-panic/dp-cli/badge.svg)](https://coveralls.io/github/defer-panic/dp-cli) [![Go Report Card](https://goreportcard.com/badge/github.com/defer-panic/dp-cli)](https://goreportcard.com/report/github.com/defer-panic/dp-cli)
 
 Go to Releases page and download archive with latest version for your platform.
 
