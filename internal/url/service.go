@@ -4,11 +4,21 @@ import (
 	"bytes"
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/url"
 
 	. "github.com/samber/mo"
+)
+
+var (
+	ErrUnauthorized     = errors.New("unauthorized")
+	ErrInvalidInput     = errors.New("invalid input")
+	ErrIdentifierExists = errors.New("identifier already exists")
+	ErrNotFound         = errors.New("identifier not found")
+	ErrServerError      = errors.New("server error")
+	ErrUnexpectedError  = errors.New("unexpected error")
 )
 
 type Service struct {
@@ -79,14 +89,15 @@ func (s *Service) doRequest(ctx context.Context, method, path string, body, resp
 			return fmt.Errorf("failed to decode response: %w", err)
 		}
 	case http.StatusUnauthorized:
-		// TODO: use var errors
-		return fmt.Errorf("unauthorized")
+		return ErrUnauthorized
 	case http.StatusConflict:
-		return fmt.Errorf("identifier already exists")
+		return ErrIdentifierExists
 	case http.StatusNotFound:
-		return fmt.Errorf("identifier not found")
+		return ErrNotFound
+	case http.StatusInternalServerError:
+		return ErrServerError
 	default:
-		return fmt.Errorf("unexpected status code: %d", httpResp.StatusCode)
+		return fmt.Errorf("%w: %d", ErrUnexpectedError, httpResp.StatusCode)
 	}
 
 	return nil

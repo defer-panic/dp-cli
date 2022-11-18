@@ -6,8 +6,6 @@ import (
 	"fmt"
 	"net/http"
 	"net/url"
-	"os"
-	"path"
 
 	"github.com/defer-panic/dp-cli/internal/config"
 )
@@ -38,6 +36,10 @@ func (s *Service) GetAuthLink(ctx context.Context) (string, error) {
 		return "", fmt.Errorf("failed to get login page: %w", err)
 	}
 
+	if httpResp.StatusCode >= http.StatusBadRequest {
+		return "", fmt.Errorf("failed to get login page: %s", httpResp.Status)
+	}
+
 	var resp struct {
 		Link string `json:"link"`
 	}
@@ -49,22 +51,13 @@ func (s *Service) GetAuthLink(ctx context.Context) (string, error) {
 	return resp.Link, nil
 }
 
-func (s *Service) SaveToken(token, server string) error {
-	cfg, err := config.Load(config.DefaultPath)
-	if err != nil {
-		if os.IsNotExist(err) {
-			if err := os.MkdirAll(path.Dir(config.DefaultPath), 0755); err != nil {
-				return fmt.Errorf("failed to create config directory: %w", err)
-			}
-		} else {
-			return err
-		}
+func (s *Service) SaveToken(token, server, configPath string) error {
+	cfg := &config.Config{
+		Server: server,
+		JWT:  token,
 	}
-
-	cfg.JWT = token
-	cfg.Server = server
 	
-	if err := cfg.Save(config.DefaultPath); err != nil {
+	if err := cfg.Save(configPath); err != nil {
 		return fmt.Errorf("failed to save config: %w", err)
 	}
 

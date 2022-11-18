@@ -6,13 +6,13 @@ import (
 	"html/template"
 	"os"
 	"os/exec"
+	"path"
 )
 
 //go:embed resources/article.tpl.md
 var tpl string
 
-type Service struct {
-}
+type Service struct{}
 
 func NewService() *Service {
 	return &Service{}
@@ -21,6 +21,11 @@ func NewService() *Service {
 func (s *Service) Generate(input GenerateInput) error {
 	tpl, err := template.New("article").Parse(tpl)
 	if err != nil {
+		return err
+	}
+
+	// ensure output directory exists
+	if err := os.MkdirAll(path.Dir(input.OutputFilename), os.ModePerm); err != nil {
 		return err
 	}
 

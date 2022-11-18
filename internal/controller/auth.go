@@ -65,7 +65,7 @@ func (c *authController) SaveToken(_ *cobra.Command, args []string) error {
 		return err
 	}
 
-	if err := c.svc.SaveToken(args[0], loginServer); err != nil {
+	if err := c.svc.SaveToken(args[0], loginServer, config.DefaultPath); err != nil {
 		return err
 	}
 
