@@ -10,7 +10,7 @@ builds:
       - linux
       - windows
       - darwin
-    ldflags: "-s -w -X internal/build.Version={{.Tag}} -X internal/build.CommitHash={{.FullCommit}"
+    ldflags: "-s -w -X internal/build.Version={{.Tag}} -X internal/build.CommitHash={{.FullCommit}}"
 archives:
   - replacements:
       darwin: Darwin
