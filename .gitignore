@@ -32,3 +32,6 @@ go.work
 *.pdf
 
 dist/
+
+/tests/*.cov
+/tests/*.cov_tmp
