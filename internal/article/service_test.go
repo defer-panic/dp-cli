@@ -24,8 +24,10 @@ func TestService_Generate(t *testing.T) {
 				DocumentClass:  "article",
 				PaperSize:      "a4",
 				LineStretch:    1.5,
-				MainFont:       "Times New Roman",
-				MonoFont:       "Courier New",
+
+				// using default fonts to don't get mad with setting up fonts
+				MainFont: "",
+				MonoFont: "",
 			}
 			svc = article.NewService()
 		)
