@@ -1,11 +1,22 @@
 PROJECT_DIR = $(shell pwd)
 PROJECT_BIN = $(PROJECT_DIR)/bin
 
-TOOLKIT = $(PROJECT_BIN)/toolkit
+GOLANGCI_LINT = $(PROJECT_BIN)/golangci-lint
 
-.PHONY: toolkit
-toolkit: 
-	go build -o $(TOOLKIT) .
+.PHONY: .install-linter
+.install-linter:
+	### INSTALL GOLANGCI-LINT ###
+	[ -f $(PROJECT_BIN)/golangci-lint ] || curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(PROJECT_BIN) v1.50.1
+
+.PHONY: lint
+lint: .install-linter
+	### RUN GOLANGCI-LINT ###
+	$(GOLANGCI_LINT) run ./... --config=./.golangci.yml
+
+.PHONY: lint-fast
+lint-fast: .install-linter
+	$(GOLANGCI_LINT) run ./... --fast --config=./.golangci.yml
+
 
 TESTS_WD = $(PROJECT_DIR)/tests
 
