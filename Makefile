@@ -34,3 +34,9 @@ test-coverage: test
 .PHONY: test-coverage-html
 test-coverage-html: test
 	go tool cover --html=$(TESTS_WD)/profile.cov 
+
+
+# === Build ===
+.PHONY: build
+build:
+	go build -o $(PROJECT_BIN)/dp-cli ./cmd/
