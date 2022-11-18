@@ -31,6 +31,9 @@ jobs:
       with:
         go-version: 1.19
 
+    - name: install pandoc
+      run: apt-get install -y pandoc
+
     - name: test
       run: make TESTS_WD=$GITHUB_WORKSPACE test
 
