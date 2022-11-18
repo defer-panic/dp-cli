@@ -27,6 +27,7 @@ func init() {
 		controller.Article(article.NewService()),
 		controller.URL(url.NewService(cfg.Server, cfg.JWT)),
 		controller.Auth(auth.NewService(cfg.Server)),
+		controller.Version(),
 	}
 
 	for _, c := range controllerConstructors {
