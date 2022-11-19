@@ -1,6 +1,6 @@
 package build
 
-const (
+var (
 	Version    = "snapshot"
 	CommitHash = "unknown"
 )
